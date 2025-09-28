@@ -12,6 +12,12 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "typescript": "^5.3.3"
+    "@types/papaparse": "^5.3.16",
+    "@types/uuid": "^11.0.0",
+    "@types/xml2js": "^0.4.14",
+    "papaparse": "^5.5.3",
+    "typescript": "^5.3.3",
+    "uuid": "^13.0.0",
+    "xml2js": "^0.6.2"
   }
 }
