@@ -26,7 +26,9 @@
       "Bash(pnpm remove:*)",
       "Bash(git reset:*)",
       "Bash(git restore:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(cp:*)",
+      "Bash(pnpm run:*)"
     ],
     "deny": [],
     "ask": []
