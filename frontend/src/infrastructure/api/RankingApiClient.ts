@@ -1,10 +1,10 @@
 export interface RankingEntry {
   id: string
   word: string
-  reading?: string
+  reading: string | null
   knowCount: number
   unknownCount: number
-  unknownRate: number
+  rate: number
 }
 
 export class RankingApiClient {
