@@ -14,7 +14,19 @@
       "Bash(git branch:*)",
       "Bash(git remote add:*)",
       "Bash(git push:*)",
-      "Bash(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S %Z')"
+      "Bash(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S %Z')",
+      "mcp__serena-mcp-server__list_dir",
+      "Bash(pnpm create:*)",
+      "Bash(node:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm dlx:*)",
+      "Bash(pnpm exec tailwindcss:*)",
+      "Bash(mkdir:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
