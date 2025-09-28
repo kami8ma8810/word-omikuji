@@ -1,3 +1,5 @@
+import 'dotenv/config'
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { voteRoute } from './routes/vote'
@@ -19,4 +21,11 @@ app.route('/api/vote', voteRoute)
 app.route('/api/stats', statsRoute)
 app.route('/api/ranking', rankingRoute)
 
-export default app
+const port = parseInt(process.env.PORT || '8787', 10)
+
+console.log(`🚀 Server is running on http://localhost:${port}`)
+
+serve({
+  fetch: app.fetch,
+  port,
+})
