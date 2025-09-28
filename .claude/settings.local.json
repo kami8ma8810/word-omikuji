@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:playwright.dev)",
+      "mcp__obsidian-mcp-tools__fetch",
+      "Bash(mv:*)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:wordnet.princeton.edu)",
+      "Bash(grep:*)",
+      "Bash(git add:*)",
+      "Bash(rm:*)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
