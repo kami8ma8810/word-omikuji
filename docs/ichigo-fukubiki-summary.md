@@ -30,7 +30,7 @@
 - アクセシビリティ対応: WCAG 2.2 AA準拠
 - パフォーマンス最適化: Code Splitting, Lazy Load
 - UI設計: Storybookによる設計管理
-- テスト: Jest + React Testing Library + Playwright + axe-core
+- テスト: Vitest + React Testing Library + Playwright + axe-core
 
 UIライブラリ:
 - **shadcn/ui** (推奨)
@@ -53,7 +53,8 @@ UIライブラリ:
 - **品詞**: 名詞、動詞、形容詞、副詞、慣用句・四字熟語
 - **規模**: 各言語約4,000語
 - **データソース**: 
-  - 日本語: JMdict + BCCWJ頻度リスト（頻度ベースフィルタリング）
+  - 日本語: JMdict + 頻度データ（青空文庫またはWikipedia）
+  - 注意: BCCWJ頻度リストは研究目的のみで使用可能なため、本番環境では使用しません。
   - 英語: WordNet + CEFR（B1〜C2レベル）
 - **形式**: JSON（language別に分割）
 - **フィルタリング戦略**: 
@@ -459,7 +460,9 @@ word-omikuji/
 **1.1 データソースのダウンロード**
 - [ ] JMdict XMLをダウンロード（https://www.edrdg.org/jmdict/j_jmdict.html）
 - [ ] WordNetデータベースをダウンロード（https://wordnet.princeton.edu/download/current-version）
-- [ ] BCCWJ頻度リストを取得（https://clrd.ninjal.ac.jp/bccwj/）
+- [ ] 日本語頻度データを取得（青空文庫またはWikipedia日本語版）
+  - 推奨: https://www.aozora.gr.jp/ または https://dumps.wikimedia.org/jawiki/
+  - 理由: BCCWJ頻度リストは再配布不可のため、本番環境では代替データを使用
 - [ ] CEFR語彙リストを取得（https://www.englishprofile.org/wordlists または https://www.lextutor.ca/vp/eng/）
 
 **1.2 基本語リストの作成**
@@ -871,7 +874,7 @@ for (const entry of sample) {
 **事前準備**
 - [ ] JMdict XMLダウンロード
 - [ ] WordNetダウンロード
-- [ ] BCCWJ頻度リストダウンロード
+- [ ] 日本語頻度データダウンロード（青空文庫/Wikipedia）
 - [ ] CEFR語彙リストダウンロード
 - [ ] 基本語リスト作成（日本語）
 - [ ] 基本語リスト作成（英語）
@@ -1255,7 +1258,7 @@ Response: Array<{
 14. APIのキャッシュ戦略実装
 
 ### フェーズ4: 品質向上（2〜3日）
-15. テスト実装（Jest + Playwright + axe-core）
+15. テスト実装（Vitest + Playwright + axe-core）
 16. WCAG 2.2 AA準拠チェック
 17. セキュリティ対策実装（XSS、CSP）
 18. パフォーマンス最適化
@@ -1291,7 +1294,7 @@ Response: Array<{
 - ✅ 匿名投票システム
 
 ### テスト・品質
-- ✅ Jest（単体テスト）
+- ✅ Vitest（単体テスト）
 - ✅ Playwright（E2Eテスト）
 - ✅ axe-core（アクセシビリティ自動検証）
 - ✅ CI/CD（GitHub Actions）
