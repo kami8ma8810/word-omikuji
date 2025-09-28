@@ -38,6 +38,11 @@ export class DrawDailyWord {
       drawnAt: Date.now(),
     })
 
+    await this.seenWordRepo.add({
+      wordId: drawnWord.id,
+      seenAt: Date.now(),
+    })
+
     return drawnWord
   }
 }

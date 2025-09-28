@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs'
 import Papa from 'papaparse'
-import type { CEFREntry } from '../types'
 
 export async function loadCEFR(path: string): Promise<Map<string, string>> {
   console.log('📚 Loading CEFR vocabulary...')

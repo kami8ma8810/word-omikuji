@@ -8,7 +8,7 @@ export class KnowledgeRepository implements IKnowledgeRepository {
   }
 
   async getByKnows(knows: boolean): Promise<MyKnowledge[]> {
-    return await db.myKnowledge.where('knows').equals(knows ? 1 : 0).toArray()
+    return await db.myKnowledge.where('knows').equals(knows).toArray()
   }
 
   async add(knowledge: MyKnowledge): Promise<void> {

@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "CEFR",
+    "papaparse",
+    "Dexie",
+    "jmdict",
+    "wordnet",
+    "Hono",
+    "Prisma",
+    "Supabase",
+    "IndexedDB",
+    "omikuji",
+    "fukubiki"
+  ],
+  "ignoreWords": [],
+  "import": []
+}

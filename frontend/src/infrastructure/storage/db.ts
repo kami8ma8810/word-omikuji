@@ -21,6 +21,11 @@ class WordOmikujiDB extends Dexie {
       myKnowledge: 'wordId, knows, votedAt',
       seenWords: 'wordId, seenAt',
     })
+
+    this.vocabulary = this.table('vocabulary')
+    this.dailyDraws = this.table('dailyDraws')
+    this.myKnowledge = this.table('myKnowledge')
+    this.seenWords = this.table('seenWords')
   }
 }
 
