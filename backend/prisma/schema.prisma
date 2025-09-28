@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vocabulary {
+  id              String   @id
+  word            String
+  reading         String?
+  definition      String
+  partOfSpeech    String   @map("part_of_speech")
+  language        String
+  difficultyLevel Int      @map("difficulty_level")
+  frequencyRank   Int?     @map("frequency_rank")
+  stats           WordStats?
+
+  @@map("vocabulary")
+}
+
+model WordStats {
+  wordId        String      @id @map("word_id")
+  knowCount     Int         @default(0) @map("know_count")
+  unknownCount  Int         @default(0) @map("unknown_count")
+  updatedAt     DateTime    @default(now()) @updatedAt @map("updated_at")
+  vocabulary    Vocabulary  @relation(fields: [wordId], references: [id])
+
+  @@map("word_stats")
+}
