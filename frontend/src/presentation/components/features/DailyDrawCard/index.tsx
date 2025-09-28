@@ -5,13 +5,20 @@ import { useVote } from '@/presentation/hooks/useVote'
 import './styles.css'
 
 export const DailyDrawCard = () => {
-  const { currentWord: word, isLoading: loading, error: fetchError, stats } = useAppContext()
+  const { 
+    currentWord: word, 
+    isFetchingWord, 
+    isSubmittingVote,
+    fetchError, 
+    voteError,
+    stats 
+  } = useAppContext()
   const { submitVote } = useVote()
   const [hasVoted, setHasVoted] = useState(false)
   
   useDailyWord()
 
-  if (loading) {
+  if (isFetchingWord) {
     return (
       <div className="daily-draw-card loading">
         <div className="spinner" />
@@ -62,19 +69,19 @@ export const DailyDrawCard = () => {
         <div className="card-actions">
           <button
             onClick={() => handleVote(false)}
-            disabled={loading}
+            disabled={isSubmittingVote}
             className="btn btn-unknown"
             aria-label="知らない"
           >
-            知らない
+            {isSubmittingVote ? '送信中...' : '知らない'}
           </button>
           <button
             onClick={() => handleVote(true)}
-            disabled={loading}
+            disabled={isSubmittingVote}
             className="btn btn-know"
             aria-label="知ってる"
           >
-            知ってる
+            {isSubmittingVote ? '送信中...' : '知ってる'}
           </button>
         </div>
       ) : (
@@ -96,8 +103,8 @@ export const DailyDrawCard = () => {
           ) : (
             <p className="stats-loading">統計を取得中...</p>
           )}
-          {fetchError && (
-            <p className="stats-error">統計の取得に失敗しました</p>
+          {voteError && (
+            <p className="stats-error">投票の送信に失敗しました</p>
           )}
         </div>
       )}

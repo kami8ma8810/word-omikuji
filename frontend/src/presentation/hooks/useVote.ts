@@ -11,12 +11,12 @@ interface UseVoteReturn {
 }
 
 export const useVote = (): UseVoteReturn => {
-  const { setLoading, setStats, setError } = useAppContext()
+  const { setSubmittingVote, setStats, setVoteError } = useAppContext()
 
   const submitVote = async (word: VocabularyEntry, knows: boolean) => {
     try {
-      setLoading(true)
-      setError(null)
+      setSubmittingVote(true)
+      setVoteError(null)
 
       const knowledgeRepo = new KnowledgeRepository()
       const seenWordRepo = new SeenWordRepository()
@@ -38,9 +38,9 @@ export const useVote = (): UseVoteReturn => {
         setStats(statsData)
       }
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Unknown error'))
+      setVoteError(err instanceof Error ? err : new Error('Unknown error'))
     } finally {
-      setLoading(false)
+      setSubmittingVote(false)
     }
   }
 

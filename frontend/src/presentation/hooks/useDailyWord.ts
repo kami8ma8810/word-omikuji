@@ -10,12 +10,12 @@ interface UseDailyWordReturn {
 }
 
 export const useDailyWord = (): UseDailyWordReturn => {
-  const { setCurrentWord, setLoading, setError } = useAppContext()
+  const { setCurrentWord, setFetchingWord, setFetchError } = useAppContext()
 
   const fetchDailyWord = useCallback(async () => {
     try {
-      setLoading(true)
-      setError(null)
+      setFetchingWord(true)
+      setFetchError(null)
 
       const vocabularyRepo = new VocabularyRepository()
       const dailyDrawRepo = new DailyDrawRepository()
@@ -26,11 +26,11 @@ export const useDailyWord = (): UseDailyWordReturn => {
 
       setCurrentWord(drawnWord)
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Unknown error'))
+      setFetchError(err instanceof Error ? err : new Error('Unknown error'))
     } finally {
-      setLoading(false)
+      setFetchingWord(false)
     }
-  }, [setCurrentWord, setLoading, setError])
+  }, [setCurrentWord, setFetchingWord, setFetchError])
 
   useEffect(() => {
     fetchDailyWord()

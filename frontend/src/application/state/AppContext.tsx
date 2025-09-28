@@ -4,16 +4,21 @@ import type { VocabularyEntry, WordStats } from '@/shared/types'
 interface AppState {
   currentWord: VocabularyEntry | null
   stats: WordStats | null
-  isLoading: boolean
-  error: Error | null
+  isFetchingWord: boolean
+  isSubmittingVote: boolean
+  fetchError: Error | null
+  voteError: Error | null
 }
 
 interface AppContextType extends AppState {
   setCurrentWord: (word: VocabularyEntry | null) => void
   setStats: (stats: WordStats | null) => void
-  setLoading: (loading: boolean) => void
-  setError: (error: Error | null) => void
-  clearError: () => void
+  setFetchingWord: (loading: boolean) => void
+  setSubmittingVote: (loading: boolean) => void
+  setFetchError: (error: Error | null) => void
+  setVoteError: (error: Error | null) => void
+  clearFetchError: () => void
+  clearVoteError: () => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -21,23 +26,34 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [currentWord, setCurrentWord] = useState<VocabularyEntry | null>(null)
   const [stats, setStats] = useState<WordStats | null>(null)
-  const [isLoading, setLoading] = useState(false)
-  const [error, setError] = useState<Error | null>(null)
+  const [isFetchingWord, setFetchingWord] = useState(false)
+  const [isSubmittingVote, setSubmittingVote] = useState(false)
+  const [fetchError, setFetchError] = useState<Error | null>(null)
+  const [voteError, setVoteError] = useState<Error | null>(null)
 
-  const clearError = useCallback(() => {
-    setError(null)
+  const clearFetchError = useCallback(() => {
+    setFetchError(null)
+  }, [])
+
+  const clearVoteError = useCallback(() => {
+    setVoteError(null)
   }, [])
 
   const value: AppContextType = {
     currentWord,
     stats,
-    isLoading,
-    error,
+    isFetchingWord,
+    isSubmittingVote,
+    fetchError,
+    voteError,
     setCurrentWord,
     setStats,
-    setLoading,
-    setError,
-    clearError,
+    setFetchingWord,
+    setSubmittingVote,
+    setFetchError,
+    setVoteError,
+    clearFetchError,
+    clearVoteError,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
