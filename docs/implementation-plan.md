@@ -2209,7 +2209,7 @@ word-omikuji/
 │   └── manifest.json             # PWAマニフェスト
 │
 ├── tests/
-│   ├── unit/                     # 単体テスト（Jest）
+│   ├── unit/                     # 単体テスト（Vitest）
 │   ├── e2e/                      # E2Eテスト（Playwright）
 │   └── accessibility/            # アクセシビリティテスト
 │
