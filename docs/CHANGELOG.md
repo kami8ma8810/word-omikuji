@@ -1,0 +1,46 @@
+# 変更履歴
+
+## [Unreleased]
+
+### 2025-09-28
+
+#### Changed
+- **バックエンドアーキテクチャ変更**: Cloudflare Workers から Node.js サーバー構成に変更
+  - **理由**: 
+    - Cloudflare Workers では `process.env` が使用できない
+    - Prisma Client が Workers 環境で動作しない（Query Engine 依存）
+  - **対応**:
+    - `@hono/node-server` による Node.js サーバー化
+    - `dotenv` による環境変数管理
+    - `tsx` による開発時ホットリロード対応
+  - **デプロイ先候補**: Vercel / Railway / Render（Node.js ホスティングサービス）
+
+#### Added
+- バリデーション強化
+  - `limit` パラメータ: NaN チェック、上限100・下限1、デフォルト20
+  - `wordId` パラメータ: 文字列型チェック、空文字チェック、エラーハンドリング
+- TypeScript strict モード有効化（`backend/tsconfig.json`）
+- 開発環境改善: `tsx watch` によるホットリロード
+
+#### Removed
+- `wrangler` 関連パッケージ・設定ファイル削除
+- `@cloudflare/workers-types` 削除
+
+---
+
+## [2025-09-28] - プロジェクト初期構築
+
+### Added
+- プロジェクト基盤セットアップ
+  - Vite + React + TypeScript (フロントエンド)
+  - Hono + Prisma + PostgreSQL (バックエンド)
+  - pnpm workspace によるモノレポ構成
+- Tailwind CSS 設定
+- Docker Compose (PostgreSQL)
+- Prisma スキーマ定義
+- バックエンド API 実装
+  - 投票 API (`POST /api/vote`)
+  - 統計 API (`GET /api/stats/:wordId`)
+  - ランキング API (`GET /api/ranking/unknown`, `/api/ranking/known`)
+- クリーンアーキテクチャに基づいたディレクトリ構造
+- 環境変数テンプレート (`.env.example`)

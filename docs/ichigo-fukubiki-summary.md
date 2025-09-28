@@ -40,9 +40,11 @@ UIライブラリ:
 
 ### バックエンド
 - **Webフレームワーク**: Hono（軽量・高速）
+- **ランタイム**: Node.js（`@hono/node-server`）
 - **ORM**: Prisma
 - **データベース**: PostgreSQL (Supabase)
-- **ホスティング**: Cloudflare Workers（無料枠: 10万リクエスト/日）
+- **ホスティング**: Vercel / Railway / Render（Node.js ホスティング、無料枠あり）
+- **注意**: 当初は Cloudflare Workers を予定していましたが、Prisma 非対応のため Node.js サーバー構成に変更
 
 ---
 
