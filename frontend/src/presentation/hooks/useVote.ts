@@ -3,6 +3,8 @@ import type { VocabularyEntry } from '../../shared/types/vocabulary'
 import { SubmitKnowledge } from '../../domain/usecases/SubmitKnowledge'
 import { KnowledgeRepository } from '../../infrastructure/repositories/KnowledgeRepository'
 import { SeenWordRepository } from '../../infrastructure/repositories/SeenWordRepository'
+import { VoteApiClient } from '../../infrastructure/api/VoteApiClient'
+import { StatsApiClient } from '../../infrastructure/api/StatsApiClient'
 
 interface VoteStats {
   knowCount: number
@@ -32,20 +34,17 @@ export const useVote = (): UseVoteReturn => {
 
       await useCase.execute(word, knows)
 
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8787'
-      const voteResponse = await fetch(`${apiUrl}/api/vote`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ wordId: word.id, knows }),
-      })
+      const voteApiClient = new VoteApiClient()
+      const success = await voteApiClient.submitVote(word.id, knows)
 
-      if (!voteResponse.ok) {
-        throw new Error('Failed to submit vote to server')
+      if (!success) {
+        throw new Error('投票の送信に失敗しました')
       }
 
-      const statsResponse = await fetch(`${apiUrl}/api/stats/${word.id}`)
-      if (statsResponse.ok) {
-        const statsData = await statsResponse.json()
+      const statsApiClient = new StatsApiClient()
+      const statsData = await statsApiClient.getWordStats(word.id)
+
+      if (statsData) {
         setStats({
           knowCount: statsData.knowCount,
           unknownCount: statsData.unknownCount,
