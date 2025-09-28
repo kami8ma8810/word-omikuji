@@ -1,12 +1,15 @@
 import { useState } from 'react'
+import { useAppContext } from '@/application/state'
 import { useDailyWord } from '@/presentation/hooks/useDailyWord'
 import { useVote } from '@/presentation/hooks/useVote'
 import './styles.css'
 
 export const DailyDrawCard = () => {
-  const { word, loading, error: fetchError } = useDailyWord()
-  const { submitting, stats, error: voteError, submitVote } = useVote()
+  const { currentWord: word, isLoading: loading, error: fetchError, stats } = useAppContext()
+  const { submitVote } = useVote()
   const [hasVoted, setHasVoted] = useState(false)
+  
+  useDailyWord()
 
   if (loading) {
     return (
@@ -59,7 +62,7 @@ export const DailyDrawCard = () => {
         <div className="card-actions">
           <button
             onClick={() => handleVote(false)}
-            disabled={submitting}
+            disabled={loading}
             className="btn btn-unknown"
             aria-label="知らない"
           >
@@ -67,7 +70,7 @@ export const DailyDrawCard = () => {
           </button>
           <button
             onClick={() => handleVote(true)}
-            disabled={submitting}
+            disabled={loading}
             className="btn btn-know"
             aria-label="知ってる"
           >
@@ -93,7 +96,7 @@ export const DailyDrawCard = () => {
           ) : (
             <p className="stats-loading">統計を取得中...</p>
           )}
-          {voteError && (
+          {fetchError && (
             <p className="stats-error">統計の取得に失敗しました</p>
           )}
         </div>

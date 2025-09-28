@@ -1,23 +1,18 @@
-import { useState, useEffect } from 'react'
-import type { VocabularyEntry } from '../../shared/types/vocabulary'
+import { useEffect, useCallback } from 'react'
+import { useAppContext } from '../../application/state'
 import { DrawDailyWord } from '../../domain/usecases/DrawDailyWord'
 import { VocabularyRepository } from '../../infrastructure/repositories/VocabularyRepository'
 import { DailyDrawRepository } from '../../infrastructure/repositories/DailyDrawRepository'
 import { SeenWordRepository } from '../../infrastructure/repositories/SeenWordRepository'
 
 interface UseDailyWordReturn {
-  word: VocabularyEntry | null
-  loading: boolean
-  error: Error | null
   refetch: () => Promise<void>
 }
 
 export const useDailyWord = (): UseDailyWordReturn => {
-  const [word, setWord] = useState<VocabularyEntry | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const { setCurrentWord, setLoading, setError } = useAppContext()
 
-  const fetchDailyWord = async () => {
+  const fetchDailyWord = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -29,22 +24,19 @@ export const useDailyWord = (): UseDailyWordReturn => {
       const useCase = new DrawDailyWord(vocabularyRepo, dailyDrawRepo, seenWordRepo)
       const drawnWord = await useCase.execute()
 
-      setWord(drawnWord)
+      setCurrentWord(drawnWord)
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Unknown error'))
     } finally {
       setLoading(false)
     }
-  }
+  }, [setCurrentWord, setLoading, setError])
 
   useEffect(() => {
     fetchDailyWord()
-  }, [])
+  }, [fetchDailyWord])
 
   return {
-    word,
-    loading,
-    error,
     refetch: fetchDailyWord,
   }
 }

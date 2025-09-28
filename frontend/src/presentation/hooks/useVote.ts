@@ -1,31 +1,21 @@
-import { useState } from 'react'
 import type { VocabularyEntry } from '../../shared/types/vocabulary'
+import { useAppContext } from '../../application/state'
 import { SubmitKnowledge } from '../../domain/usecases/SubmitKnowledge'
 import { KnowledgeRepository } from '../../infrastructure/repositories/KnowledgeRepository'
 import { SeenWordRepository } from '../../infrastructure/repositories/SeenWordRepository'
 import { VoteApiClient } from '../../infrastructure/api/VoteApiClient'
 import { StatsApiClient } from '../../infrastructure/api/StatsApiClient'
 
-interface VoteStats {
-  knowCount: number
-  unknownCount: number
-}
-
 interface UseVoteReturn {
-  submitting: boolean
-  stats: VoteStats | null
-  error: Error | null
   submitVote: (word: VocabularyEntry, knows: boolean) => Promise<void>
 }
 
 export const useVote = (): UseVoteReturn => {
-  const [submitting, setSubmitting] = useState(false)
-  const [stats, setStats] = useState<VoteStats | null>(null)
-  const [error, setError] = useState<Error | null>(null)
+  const { setLoading, setStats, setError } = useAppContext()
 
   const submitVote = async (word: VocabularyEntry, knows: boolean) => {
     try {
-      setSubmitting(true)
+      setLoading(true)
       setError(null)
 
       const knowledgeRepo = new KnowledgeRepository()
@@ -45,22 +35,16 @@ export const useVote = (): UseVoteReturn => {
       const statsData = await statsApiClient.getWordStats(word.id)
 
       if (statsData) {
-        setStats({
-          knowCount: statsData.knowCount,
-          unknownCount: statsData.unknownCount,
-        })
+        setStats(statsData)
       }
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Unknown error'))
     } finally {
-      setSubmitting(false)
+      setLoading(false)
     }
   }
 
   return {
-    submitting,
-    stats,
-    error,
     submitVote,
   }
 }
