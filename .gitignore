@@ -5,3 +5,17 @@ dist/
 .env.*.local
 *.log
 .DS_Store
+
+# データソース（大容量ファイル）
+data/source/*.xml
+data/source/*.csv
+data/source/*.data
+data/source/*.db
+
+# 処理済みデータ（生成されるファイル）
+data/processed/
+data/stats/
+
+# フロントエンド用データ（自動生成）
+frontend/public/data/*.json
+frontend/public/data/*.gz
