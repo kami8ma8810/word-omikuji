@@ -82,19 +82,17 @@
 
 ## 🚧 進行中のタスク
 
-### フェーズ2: コア機能実装（続き）
-- Context API による状態管理実装
-
-### フェーズ3: リスト・ランキング画面実装準備
-- React Router 導入検討
-- ページ遷移の設計
+### フェーズ3: リスト・ランキング画面実装
+- React Router 導入
+- ページ遷移の実装
+- リスト画面の実装
 
 ---
 
 ## ⏳ 未着手のタスク
 
 ### アーキテクチャ改善（フェーズ2）
-- [ ] Context API による状態管理実装
+- [x] Context API による状態管理実装
 - [x] 独立したAPIクライアント層（VoteApiClient、StatsApiClient、RankingApiClient）
 - [x] shadcn/ui コンポーネント導入（Button、Card）
 - [ ] エラーハンドリング強化
