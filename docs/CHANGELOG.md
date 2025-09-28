@@ -2,7 +2,31 @@
 
 ## [Unreleased]
 
-### 2025-09-28
+### 2025-09-28 (最新)
+
+#### Fixed
+- **Dexie & IndexedDB 関連の重大なバグ修正**
+  - ❗️ Dexie テーブル束縛の追加: `this.table()` で正しく束縛、実行時例外を解消
+  - ❗️ boolean フィルタ修正: `KnowledgeRepository.getByKnows()` が正常動作
+  - ⚠️ 抽選時の seenWords 登録: 投票なしでも翌日は別の語が表示される
+  - 未使用 import 削除（`cefrLoader.ts`）
+  - README スタイル修正（JTF スタイルガイド準拠）
+
+#### Added
+- **フロントエンドドメイン層・インフラ層実装**
+  - 型定義（VocabularyEntry, DailyDraw, MyKnowledge 等）
+  - IndexedDB 設定（Dexie.js）
+  - リポジトリインターフェース・実装
+  - ユースケース実装（DrawDailyWord, SubmitKnowledge, GetMyKnowledgeList）
+- **語彙データ収集スクリプト完成**
+  - JMdictLoader, WordNetLoader, CEFRLoader 実装
+  - メインスクリプト（`pnpm collect:vocabulary`）
+  - 統計レポート自動生成
+- スペルチェック設定（`cspell.json`）
+
+---
+
+### 2025-09-28 (初期)
 
 #### Changed
 - **バックエンドアーキテクチャ変更**: Cloudflare Workers から Node.js サーバー構成に変更
