@@ -6,28 +6,40 @@
 
 ## 技術スタック
 
-### フロントエンド
+### ✅ 実装済み（Implemented）
+
+#### フロントエンド
 - **UI Framework**: React 19 + TypeScript
 - **Build Tool**: Vite 7
-- **スタイリング**: Tailwind CSS + shadcn/ui
-- **状態管理**: Context API
+- **スタイリング**: Tailwind CSS（カスタムCSS）
 - **ローカルストレージ**: IndexedDB (Dexie.js)
-- **HTTP Client**: Fetch API
-- **テスト**: Vitest + React Testing Library + Playwright + axe-core
+- **HTTP Client**: Fetch API（フック内で直接使用）
 
-### バックエンド
+#### バックエンド
 - **Runtime**: Node.js 24
 - **Web Framework**: Hono 4
 - **ORM**: Prisma 6
-- **Database**: PostgreSQL 15 (Supabase)
-- **開発ツール**: tsx (Hot Reload)
+- **Database**: PostgreSQL 15（開発環境：Docker Compose）
+- **開発ツール**: tsx (Hot Reload)、dotenv
 - **型チェック**: TypeScript (strict mode)
 
-### インフラ
+#### 開発環境
+- **パッケージ管理**: pnpm workspace
+- **バージョン管理**: Git
+- **データベース**: Docker Compose (PostgreSQL)
+
+### 📅 今後の実装予定（Planned）
+
+#### フロントエンド
+- **UIライブラリ**: shadcn/ui
+- **状態管理**: Context API
+- **APIクライアント層**: 独立したクライアント（VoteApiClient、StatsApiClient、RankingApiClient）
+- **テスト**: Vitest + React Testing Library + Playwright + axe-core
+
+#### インフラ
 - **フロントエンド**: Vercel / Netlify / Cloudflare Pages
 - **バックエンド**: Vercel / Railway / Render
 - **データベース**: Supabase (PostgreSQL)
-- **開発環境**: Docker Compose
 
 ---
 
@@ -61,19 +73,18 @@
                │
 ┌──────────────▼──────────────────────────┐
 │        Infrastructure Layer             │
-│  (storage, api, data)                   │
-│  - IndexedDB アダプタ                    │
-│  - API クライアント                       │
-│  - 外部データソース                       │
+│  (storage, repositories)                │
+│  - IndexedDB アダプタ（Dexie.js）        │
+│  - リポジトリ実装                        │
+│  - HTTP通信（フック内で直接Fetch使用）    │
 └─────────────────────────────────────────┘
 ```
 
-### ディレクトリ構造
+### ディレクトリ構造（実装済み）
 
 ```
 frontend/src/
-├── domain/                  # ドメイン層
-│   ├── entities/           # エンティティ（型定義は shared/types に）
+├── domain/                  # ✅ ドメイン層
 │   ├── repositories/       # リポジトリインターフェース
 │   │   ├── IVocabularyRepository.ts
 │   │   ├── IKnowledgeRepository.ts
@@ -84,45 +95,62 @@ frontend/src/
 │       ├── SubmitKnowledge.ts       # 知識投票
 │       └── GetMyKnowledgeList.ts    # リスト取得
 │
-├── infrastructure/         # インフラ層
+├── infrastructure/         # ✅ インフラ層
 │   ├── storage/
 │   │   └── db.ts           # Dexie.js 設定
-│   ├── repositories/       # リポジトリ実装
-│   │   ├── VocabularyRepository.ts
-│   │   ├── KnowledgeRepository.ts
-│   │   ├── DailyDrawRepository.ts
-│   │   └── SeenWordRepository.ts
-│   └── api/                # API クライアント
+│   └── repositories/       # リポジトリ実装
+│       ├── VocabularyRepository.ts
+│       ├── KnowledgeRepository.ts
+│       ├── DailyDrawRepository.ts
+│       └── SeenWordRepository.ts
+│
+├── presentation/           # ✅ プレゼンテーション層
+│   ├── components/
+│   │   └── features/       # 機能別コンポーネント
+│   │       └── DailyDrawCard/
+│   │           ├── index.tsx
+│   │           └── styles.css
+│   ├── hooks/              # カスタムフック
+│   │   ├── useDailyWord.ts
+│   │   └── useVote.ts
+│   └── pages/              # ページコンポーネント
+│       ├── HomePage.tsx
+│       └── HomePage.css
+│
+└── shared/                 # ✅ 共通
+    ├── types/              # 型定義
+    │   ├── index.ts
+    │   └── vocabulary.ts
+    └── utils/              # ユーティリティ
+        └── dateUtils.ts
+```
+
+### 今後追加予定のディレクトリ
+
+```
+├── infrastructure/
+│   └── api/                # 📅 API クライアント（予定）
 │       ├── VoteApiClient.ts
 │       ├── StatsApiClient.ts
 │       └── RankingApiClient.ts
 │
-├── presentation/           # プレゼンテーション層
+├── presentation/
 │   ├── components/
-│   │   ├── ui/             # shadcn/ui コンポーネント
-│   │   └── features/       # 機能別コンポーネント
-│   │       ├── DailyDrawCard/
-│   │       ├── KnowledgeList/
-│   │       ├── RankingBoard/
-│   │       └── StatsDisplay/
-│   ├── hooks/              # カスタムフック
-│   │   ├── useDailyWord.ts
-│   │   ├── useVote.ts
-│   │   └── useKnowledgeList.ts
-│   └── pages/              # ページコンポーネント
-│       ├── HomePage.tsx
-│       ├── KnownListPage.tsx
-│       ├── UnknownListPage.tsx
-│       └── RankingPage.tsx
+│   │   ├── ui/             # 📅 shadcn/ui コンポーネント（予定）
+│   │   └── features/
+│   │       ├── KnowledgeList/    # 📅 予定
+│   │       ├── RankingBoard/     # 📅 予定
+│   │       └── StatsDisplay/     # 📅 予定
+│   ├── hooks/
+│   │   └── useKnowledgeList.ts   # 📅 予定
+│   └── pages/
+│       ├── KnownListPage.tsx     # 📅 予定
+│       ├── UnknownListPage.tsx   # 📅 予定
+│       └── RankingPage.tsx       # 📅 予定
 │
-├── application/            # アプリケーション層
-│   └── state/              # 状態管理
-│       └── AppContext.tsx
-│
-└── shared/                 # 共通
-    ├── types/              # 型定義
-    ├── utils/              # ユーティリティ
-    └── constants/          # 定数
+└── application/            # 📅 アプリケーション層（予定）
+    └── state/              # Context API
+        └── AppContext.tsx
 ```
 
 ---

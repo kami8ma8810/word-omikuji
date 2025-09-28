@@ -12,7 +12,10 @@
     "Supabase",
     "IndexedDB",
     "omikuji",
-    "fukubiki"
+    "fukubiki",
+    "shadcn",
+    "VARCHAR",
+    "WCAG"
   ],
   "ignoreWords": [],
   "import": []

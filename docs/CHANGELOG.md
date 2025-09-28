@@ -4,25 +4,37 @@
 
 ### 2025-09-28 (最新)
 
-#### Fixed
-- **Dexie & IndexedDB 関連の重大なバグ修正**
-  - ❗️ Dexie テーブル束縛の追加: `this.table()` で正しく束縛、実行時例外を解消
-  - ❗️ boolean フィルタ修正: `KnowledgeRepository.getByKnows()` が正常動作
-  - ⚠️ 抽選時の seenWords 登録: 投票なしでも翌日は別の語が表示される
-  - 未使用 import 削除（`cefrLoader.ts`）
-  - README スタイル修正（JTF スタイルガイド準拠）
-
 #### Added
-- **フロントエンドドメイン層・インフラ層実装**
-  - 型定義（VocabularyEntry, DailyDraw, MyKnowledge 等）
+- **✅ フロントエンドUI実装**
+  - DailyDrawCard コンポーネント（カスタムCSS）
+  - HomePage実装（レイアウト・スタイル）
+  - カスタムフック（useDailyWord, useVote）
+  - TypeScript パスエイリアス設定（@/*）
+  - Tailwind CSS v4 対応（@tailwindcss/postcss）
+- **✅ フロントエンドドメイン層・インフラ層実装**
+  - 型定義（VocabularyEntry, DailyDraw, MyKnowledge等）
   - IndexedDB 設定（Dexie.js）
-  - リポジトリインターフェース・実装
+  - リポジトリインターフェース・実装（4種類）
   - ユースケース実装（DrawDailyWord, SubmitKnowledge, GetMyKnowledgeList）
-- **語彙データ収集スクリプト完成**
-  - JMdictLoader, WordNetLoader, CEFRLoader 実装
+- **✅ 語彙データ収集スクリプト完成**
+  - JMdictLoader, WordNetLoader, CEFRLoader実装
   - メインスクリプト（`pnpm collect:vocabulary`）
   - 統計レポート自動生成
-- スペルチェック設定（`cspell.json`）
+- **✅ ドキュメント整備**
+  - architecture.md（実装済みと予定を明確化）
+  - progress.md（実装コードベースで更新）
+  - スペルチェック設定（cspell.json）
+
+#### Fixed
+- **✅ Dexie & IndexedDB 関連の重大なバグ修正**
+  - Dexieテーブル束縛の追加（`this.table()`）
+  - booleanフィルタ修正（`filter()`メソッド使用）
+  - 抽選時のseenWords登録（翌日は必ず別の語）
+  - 未使用import削除（cefrLoader.ts）
+- **✅ TypeScript erasableSyntaxOnly対応**
+  - `private`修飾子を削除（フィールド宣言に変更）
+  - SeenWordRepositoryをSubmitKnowledgeに追加
+- **✅ README スタイル修正**（JTFスタイルガイド準拠）
 
 ---
 

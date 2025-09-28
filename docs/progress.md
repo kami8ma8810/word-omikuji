@@ -21,33 +21,41 @@
 
 ---
 
-## ✅ 完了したタスク
+## ✅ 完了したタスク（実装コードベース）
 
 ### バックエンド
 - [x] Hono + Prisma + PostgreSQL 環境構築
-- [x] Node.js サーバー構成（Cloudflare Workers から変更）
+- [x] Node.js サーバー構成（@hono/node-server + dotenv + tsx）
 - [x] 投票 API (`POST /api/vote`)
 - [x] 統計 API (`GET /api/stats/:wordId`)
 - [x] ランキング API (`GET /api/ranking/unknown`, `/api/ranking/known`)
-- [x] バリデーション強化（limit, wordId）
+- [x] バリデーション強化（limit: 1-100、wordId: 文字列チェック）
 - [x] Prisma スキーマ定義
 - [x] Docker Compose (PostgreSQL)
+- [x] TypeScript strict mode 有効化
 
 ### フロントエンド
 - [x] Vite + React + TypeScript 環境構築
-- [x] Tailwind CSS + shadcn/ui 設定
+- [x] Tailwind CSS 設定（v4 + @tailwindcss/postcss）
+- [x] TypeScript パスエイリアス設定（@/*）
 - [x] クリーンアーキテクチャのディレクトリ構造
-- [x] 型定義（VocabularyEntry, DailyDraw, MyKnowledge 等）
+- [x] 型定義（VocabularyEntry, DailyDraw, MyKnowledge等）
 - [x] IndexedDB 設定（Dexie.js）
-- [x] リポジトリインターフェース・実装
-- [x] ユースケース実装
+- [x] Dexieバグ修正（テーブル束縛、booleanフィルタ）
+- [x] リポジトリインターフェース・実装（4種類）
+- [x] ユースケース実装（3種類）
   - DrawDailyWord（日替わり抽選ロジック）
   - SubmitKnowledge（知ってる/知らない投票）
   - GetMyKnowledgeList（マイリスト取得）
-- [x] Dexie バグ修正（テーブル束縛、boolean フィルタ）
+- [x] カスタムフック実装
+  - useDailyWord（日替わり語取得）
+  - useVote（投票処理）
+- [x] UIコンポーネント実装（カスタムCSS）
+  - DailyDrawCard（日替わり抽選カード）
+  - HomePage（ホーム画面）
 
 ### 語彙データ収集
-- [x] 型定義
+- [x] 型定義（VocabularyEntry等）
 - [x] フィルター実装（品詞・頻度・基本語・難易度）
 - [x] ローダー実装（JMdict, WordNet, CEFR, Frequency）
 - [x] エクスポーター実装（JSON, 統計）
@@ -57,6 +65,8 @@
 ### ドキュメント
 - [x] README.md（セットアップ手順、技術スタック）
 - [x] CHANGELOG.md（変更履歴）
+- [x] architecture.md（アーキテクチャ設計書）
+- [x] progress.md（進捗状況）
 - [x] データソース取得方法
 - [x] スペルチェック設定（cspell.json）
 
@@ -64,26 +74,23 @@
 
 ## 🚧 進行中のタスク
 
-### フロントエンド UI 実装
-- [ ] DailyDrawCard コンポーネント
-- [ ] カスタムフック（useDailyWord, useVote）
-- [ ] ページコンポーネント（HomePage）
+なし
 
 ---
 
 ## ⏳ 未着手のタスク
 
-### フロントエンド（フェーズ2）
-- [ ] API 連携実装
-- [ ] 状態管理（Context API）
-- [ ] エラーハンドリング
-- [ ] ローディング表示
+### アーキテクチャ改善（フェーズ2）
+- [ ] Context API による状態管理実装
+- [ ] 独立したAPIクライアント層（VoteApiClient、StatsApiClient、RankingApiClient）
+- [ ] shadcn/ui コンポーネント導入
+- [ ] エラーハンドリング強化
 
-### フロントエンド（フェーズ3）
-- [ ] 知ってるリスト画面
-- [ ] 知らないリスト画面
-- [ ] ランキング画面
-- [ ] About 画面
+### 機能追加（フェーズ3）
+- [ ] 知ってるリスト画面（KnownListPage）
+- [ ] 知らないリスト画面（UnknownListPage）
+- [ ] ランキング画面（RankingPage）
+- [ ] About画面
 - [ ] 検索機能
 - [ ] ソート機能
 
@@ -94,18 +101,16 @@
 - [ ] Playwright E2E テスト
 - [ ] axe-core アクセシビリティテスト
 - [ ] WCAG 2.2 AA 準拠チェック
-- [ ] パフォーマンス最適化
-- [ ] Code Splitting
-- [ ] Lazy Load
+- [ ] パフォーマンス最適化（Code Splitting、Lazy Load）
 
 ### リリース準備（フェーズ5）
-- [ ] PWA 対応（manifest.json, service worker）
+- [ ] PWA 対応（manifest.json、service worker）
 - [ ] プッシュ通知実装
 - [ ] 出典・ライセンス表記
 - [ ] フロントエンドデプロイ（Vercel）
 - [ ] バックエンドデプロイ（Railway / Render）
 - [ ] データベースセットアップ（Supabase）
-- [ ] 語彙データ投入
+- [ ] 語彙データ投入（JMdict、WordNet）
 - [ ] 本番環境テスト
 
 ---
