@@ -2,7 +2,11 @@ import type { IKnowledgeRepository } from '../repositories/IKnowledgeRepository'
 import type { MyKnowledge } from '../../shared/types'
 
 export class GetMyKnowledgeList {
-  constructor(private knowledgeRepo: IKnowledgeRepository) {}
+  knowledgeRepo: IKnowledgeRepository
+
+  constructor(knowledgeRepo: IKnowledgeRepository) {
+    this.knowledgeRepo = knowledgeRepo
+  }
 
   async execute(knows?: boolean): Promise<MyKnowledge[]> {
     if (typeof knows === 'boolean') {

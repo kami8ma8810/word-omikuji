@@ -3,10 +3,16 @@ import type { ISeenWordRepository } from '../repositories/ISeenWordRepository'
 import type { VocabularyEntry } from '../../shared/types'
 
 export class SubmitKnowledge {
+  knowledgeRepo: IKnowledgeRepository
+  seenWordRepo: ISeenWordRepository
+
   constructor(
-    private knowledgeRepo: IKnowledgeRepository,
-    private seenWordRepo: ISeenWordRepository
-  ) {}
+    knowledgeRepo: IKnowledgeRepository,
+    seenWordRepo: ISeenWordRepository
+  ) {
+    this.knowledgeRepo = knowledgeRepo
+    this.seenWordRepo = seenWordRepo
+  }
 
   async execute(entry: VocabularyEntry, knows: boolean): Promise<void> {
     const alreadyExists = await this.knowledgeRepo.exists(entry.id)

@@ -5,11 +5,19 @@ import type { VocabularyEntry } from '../../shared/types'
 import { getTodayDateString } from '../../shared/utils/dateUtils'
 
 export class DrawDailyWord {
+  vocabularyRepo: IVocabularyRepository
+  dailyDrawRepo: IDailyDrawRepository
+  seenWordRepo: ISeenWordRepository
+
   constructor(
-    private vocabularyRepo: IVocabularyRepository,
-    private dailyDrawRepo: IDailyDrawRepository,
-    private seenWordRepo: ISeenWordRepository
-  ) {}
+    vocabularyRepo: IVocabularyRepository,
+    dailyDrawRepo: IDailyDrawRepository,
+    seenWordRepo: ISeenWordRepository
+  ) {
+    this.vocabularyRepo = vocabularyRepo
+    this.dailyDrawRepo = dailyDrawRepo
+    this.seenWordRepo = seenWordRepo
+  }
 
   async execute(language: 'ja' | 'en' = 'ja'): Promise<VocabularyEntry | null> {
     const today = getTodayDateString()
