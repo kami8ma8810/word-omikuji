@@ -28,7 +28,12 @@
       "Bash(git restore:*)",
       "Bash(git commit:*)",
       "Bash(cp:*)",
-      "Bash(pnpm run:*)"
+      "Bash(pnpm run:*)",
+      "Bash(docker compose:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm prisma generate:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm vitest:*)"
     ],
     "deny": [],
     "ask": []
