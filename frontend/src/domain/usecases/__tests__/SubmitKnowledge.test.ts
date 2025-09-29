@@ -13,7 +13,7 @@ describe('SubmitKnowledge', () => {
     word: '一期一会',
     reading: 'いちごいちえ',
     definition: '一生に一度だけの機会',
-    partOfSpeech: '四字熟語',
+    partOfSpeech: 'idiom',
     language: 'ja',
     difficultyLevel: 3
   }

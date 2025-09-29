@@ -15,7 +15,7 @@ describe('DrawDailyWord', () => {
       word: '一期一会',
       reading: 'いちごいちえ',
       definition: '一生に一度だけの機会',
-      partOfSpeech: '四字熟語',
+      partOfSpeech: 'idiom',
       language: 'ja',
       difficultyLevel: 3
     },
@@ -24,7 +24,7 @@ describe('DrawDailyWord', () => {
       word: '花鳥風月',
       reading: 'かちょうふうげつ',
       definition: '自然の美しい景色',
-      partOfSpeech: '四字熟語',
+      partOfSpeech: 'idiom',
       language: 'ja',
       difficultyLevel: 3
     }

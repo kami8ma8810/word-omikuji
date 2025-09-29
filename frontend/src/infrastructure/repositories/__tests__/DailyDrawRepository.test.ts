@@ -31,15 +31,7 @@ describe('DailyDrawRepository', () => {
       const mockDraw: DailyDraw = {
         date: '2025-09-29',
         entryId: 'ja-1',
-        entry: {
-          id: 'ja-1',
-          word: '一期一会',
-          reading: 'いちごいちえ',
-          definition: '一生に一度だけの機会',
-          partOfSpeech: '四字熟語',
-          language: 'ja',
-          difficultyLevel: 3,
-        },
+        drawnAt: Date.now(),
       }
 
       mockDailyDrawsTable.get.mockResolvedValue(mockDraw)
@@ -65,14 +57,7 @@ describe('DailyDrawRepository', () => {
       const mockDraw: DailyDraw = {
         date: '2025-01-01',
         entryId: 'en-1',
-        entry: {
-          id: 'en-1',
-          word: 'serendipity',
-          definition: 'The occurrence of finding pleasant things by chance',
-          partOfSpeech: 'noun',
-          language: 'en',
-          difficultyLevel: 3,
-        },
+        drawnAt: Date.now() - 86400000 * 30, // 30日前
       }
 
       mockDailyDrawsTable.get.mockResolvedValue(mockDraw)
@@ -89,15 +74,7 @@ describe('DailyDrawRepository', () => {
       const newDraw: DailyDraw = {
         date: '2025-09-29',
         entryId: 'ja-1',
-        entry: {
-          id: 'ja-1',
-          word: '一期一会',
-          reading: 'いちごいちえ',
-          definition: '一生に一度だけの機会',
-          partOfSpeech: '四字熟語',
-          language: 'ja',
-          difficultyLevel: 3,
-        },
+        drawnAt: Date.now(),
       }
 
       mockDailyDrawsTable.add.mockResolvedValue('2025-09-29')
@@ -108,10 +85,11 @@ describe('DailyDrawRepository', () => {
       expect(mockDailyDrawsTable.add).toHaveBeenCalledTimes(1)
     })
 
-    it('エントリ情報なしの抽選データも追加できる', async () => {
+    it('異なるタイムスタンプの抽選データも追加できる', async () => {
       const newDraw: DailyDraw = {
         date: '2025-09-29',
         entryId: 'ja-1',
+        drawnAt: Date.now() - 3600000, // 1時間前
       }
 
       mockDailyDrawsTable.add.mockResolvedValue('2025-09-29')
@@ -126,6 +104,7 @@ describe('DailyDrawRepository', () => {
       const newDraw: DailyDraw = {
         date: '2025-09-29',
         entryId: 'ja-1',
+        drawnAt: Date.now(),
       }
 
       const error = new Error('Database error')
@@ -138,6 +117,7 @@ describe('DailyDrawRepository', () => {
       const newDraw: DailyDraw = {
         date: '2025-09-29',
         entryId: 'ja-1',
+        drawnAt: Date.now(),
       }
 
       // Dexieは主キー重複でエラーをスロー
