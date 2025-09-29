@@ -1,0 +1,40 @@
+{
+  "japanese": [
+    {
+      "id": "ja-1",
+      "word": "一期一会",
+      "reading": "いちごいちえ",
+      "definition": "一生に一度だけの機会。人との出会いを大切にすること",
+      "partOfSpeech": "四字熟語",
+      "language": "ja",
+      "difficultyLevel": 3
+    },
+    {
+      "id": "ja-2",
+      "word": "花鳥風月",
+      "reading": "かちょうふうげつ",
+      "definition": "自然の美しい景色。四季の自然の美しさを愛でること",
+      "partOfSpeech": "四字熟語",
+      "language": "ja",
+      "difficultyLevel": 3
+    }
+  ],
+  "english": [
+    {
+      "id": "en-1",
+      "word": "serendipity",
+      "definition": "The occurrence of finding pleasant things by chance",
+      "partOfSpeech": "noun",
+      "language": "en",
+      "difficultyLevel": 3
+    },
+    {
+      "id": "en-2",
+      "word": "ephemeral",
+      "definition": "Lasting for a very short time",
+      "partOfSpeech": "adjective",
+      "language": "en",
+      "difficultyLevel": 4
+    }
+  ]
+}
