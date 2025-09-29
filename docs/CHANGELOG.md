@@ -2,7 +2,34 @@
 
 ## [Unreleased]
 
-### 2025-09-28 (最新)
+### 2025-09-29 (最新)
+
+#### Added
+- **✅ フェーズ4: テスト実装の大幅進展**
+  - **ユースケース層のテスト完了**（16テスト）
+    - DrawDailyWord: 5テスト実装
+    - SubmitKnowledge: 6テスト実装  
+    - GetMyKnowledgeList: 5テスト実装（ソート保証追加）
+  - **リポジトリ層のテスト完了**（38テスト）
+    - VocabularyRepository: 10テスト実装
+    - KnowledgeRepository: 10テスト実装
+    - DailyDrawRepository: 7テスト実装
+    - SeenWordRepository: 11テスト実装
+  - **合計54個のユニットテスト**が全てパス
+
+#### Fixed
+- **✅ GetMyKnowledgeList のソート不具合修正**
+  - votedAt降順（新しい順）でのソートを実装
+  - テストの偽陽性を防ぐため意図的に逆順のモックデータで検証
+- **✅ IndexedDB モックの互換性修正**
+  - IDBOpenDBRequest互換のモックオブジェクト実装
+  - addEventListener、onsuccess等の必須プロパティ追加
+- **✅ 型定義エラーの修正**
+  - DailyDraw型: entryプロパティ削除、drawnAt必須化
+  - VocabularyEntry型: partOfSpeech「四字熟語」→「idiom」変更
+  - 全テストファイルで型の一貫性確保
+
+### 2025-09-28
 
 #### Added
 - **✅ APIクライアント層実装**

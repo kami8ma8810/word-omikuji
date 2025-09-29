@@ -2474,8 +2474,16 @@ word-omikuji/
 ### 🚧 進行中のタスク
 
 #### フェーズ4: 品質向上
-- [ ] Vitest セットアップ
-- [ ] ユニットテスト実装
+- [x] Vitest セットアップ
+- [x] ユニットテスト実装（ユースケース層）
+  - DrawDailyWord（5テスト）
+  - SubmitKnowledge（6テスト）
+  - GetMyKnowledgeList（5テスト）
+- [x] ユニットテスト実装（リポジトリ層）
+  - VocabularyRepository（10テスト）
+  - KnowledgeRepository（10テスト）
+  - DailyDrawRepository（7テスト）
+  - SeenWordRepository（11テスト）
 - [ ] React Testing Library でのコンポーネントテスト
 - [ ] Playwright E2E テスト
 - [ ] axe-core アクセシビリティテスト
@@ -2488,9 +2496,9 @@ word-omikuji/
 - [ ] エラーハンドリング強化
 
 #### 機能追加（フェーズ3以降）
-- [ ] 知ってるリスト画面（KnownListPage）
-- [ ] 知らないリスト画面（UnknownListPage）
-- [ ] ランキング画面（RankingPage）
+- [x] 知ってるリスト画面（KnownListPage）
+- [x] 知らないリスト画面（UnknownListPage）
+- [x] ランキング画面（RankingPage）
 - [ ] About画面
 - [ ] 検索機能
 - [ ] ソート機能
@@ -2507,16 +2515,18 @@ word-omikuji/
 
 ### 🐛 既知の問題
 
-- なし（2025-09-28 時点）
+- なし（2025-09-29 時点）
 
 ### 📝 次のアクション
 
-1. フェーズ4の品質向上タスクを推進
-   - Vitest/React Testing Library/Playwright の整備
+1. フェーズ4の品質向上タスクを継続
+   - React Testing Library でのコンポーネントテスト実装
+   - カスタムフックのテスト実装
+   - Playwright E2E テスト環境セットアップ
+2. アクセシビリティ対応
    - axe-core を用いたアクセシビリティ検証
-   - パフォーマンスチューニング案の洗い出し
-2. エラーハンドリング強化の設計と実装
-   - 例外フローの確認
+   - WCAG 2.2 AA 準拠チェック
+3. エラーハンドリング強化の設計と実装
    - フロント・バック両面のユーザ通知パターン整理
 3. フェーズ5に向けた準備着手
    - PWA 対応項目の洗い出しと優先度付け
