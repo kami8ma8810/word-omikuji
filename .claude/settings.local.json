@@ -33,7 +33,9 @@
       "Bash(pnpm dev:*)",
       "Bash(pnpm prisma generate:*)",
       "Bash(pnpm test:*)",
-      "Bash(pnpm vitest:*)"
+      "Bash(pnpm vitest:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm exec:*)"
     ],
     "deny": [],
     "ask": []
