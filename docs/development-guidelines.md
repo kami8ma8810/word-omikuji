@@ -1371,6 +1371,9 @@ jobs:
 
 ## 10. 状態管理のベストプラクティス
 
+React の useEffect, useState の利用に関しては、React公式の「You Might Not Need an Effect」を参照してから、本当に利用が必要がどうかよく考えてから実装すること。
+https://react.dev/learn/you-might-not-need-an-effect
+
 ### Context API を使った状態管理の注意点
 
 Context API でグローバル状態を管理する際、**状態の責務を明確に分離**しないと UX が悪化する可能性があります。
