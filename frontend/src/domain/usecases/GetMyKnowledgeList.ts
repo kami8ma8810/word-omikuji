@@ -9,9 +9,15 @@ export class GetMyKnowledgeList {
   }
 
   async execute(knows?: boolean): Promise<MyKnowledge[]> {
+    let knowledgeList: MyKnowledge[]
+    
     if (typeof knows === 'boolean') {
-      return await this.knowledgeRepo.getByKnows(knows)
+      knowledgeList = await this.knowledgeRepo.getByKnows(knows)
+    } else {
+      knowledgeList = await this.knowledgeRepo.getAll()
     }
-    return await this.knowledgeRepo.getAll()
+    
+    // votedAt 降順でソート（新しい順）
+    return knowledgeList.sort((a, b) => b.votedAt - a.votedAt)
   }
 }
