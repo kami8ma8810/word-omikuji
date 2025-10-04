@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { SubmitKnowledge } from '../SubmitKnowledge'
 import type { IKnowledgeRepository } from '@/domain/repositories'
-import type { VocabularyEntry, MyKnowledge } from '@/shared/types'
+import type { VocabularyEntry } from '@/shared/types'
 
 describe('SubmitKnowledge', () => {
   let knowledgeRepo: IKnowledgeRepository

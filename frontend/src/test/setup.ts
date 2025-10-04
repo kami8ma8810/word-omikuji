@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 
 // テストごとにDOMをクリーンアップ
 afterEach(() => {
@@ -9,39 +9,39 @@ afterEach(() => {
 
 // IndexedDBのモック（IDBOpenDBRequest互換）
 const mockIndexedDB = {
-  open: (name: string, version?: number) => {
+  open: (_name: string, _version?: number) => {
     const mockDB = {
-      name,
-      version: version || 1,
+      name: _name,
+      version: _version || 1,
       objectStoreNames: { contains: () => false, length: 0 },
-      createObjectStore: (storeName: string) => ({
+      createObjectStore: (_storeName: string) => ({
         createIndex: () => ({}),
         indexNames: { contains: () => false }
       }),
-      transaction: (storeNames: string | string[], mode?: string) => ({
-        objectStore: (storeName: string) => ({
-          get: (key: any) => ({ 
+      transaction: (_storeNames: string | string[], _mode?: string) => ({
+        objectStore: (_storeName: string) => ({
+          get: (_key: any) => ({ 
             result: null,
             onsuccess: null,
             onerror: null,
             addEventListener: vi.fn(),
             removeEventListener: vi.fn()
           }),
-          add: (value: any, key?: any) => ({ 
+          add: (_value: any, _key?: any) => ({
             result: 1,
             onsuccess: null,
             onerror: null,
             addEventListener: vi.fn(),
             removeEventListener: vi.fn()
           }),
-          put: (value: any, key?: any) => ({ 
+          put: (_value: any, _key?: any) => ({
             result: 1,
             onsuccess: null,
             onerror: null,
             addEventListener: vi.fn(),
             removeEventListener: vi.fn()
           }),
-          delete: (key: any) => ({ 
+          delete: (_key: any) => ({ 
             result: undefined,
             onsuccess: null,
             onerror: null,
@@ -69,7 +69,7 @@ const mockIndexedDB = {
             addEventListener: vi.fn(),
             removeEventListener: vi.fn()
           }),
-          index: (name: string) => ({
+          index: (_name: string) => ({
             get: () => ({ result: null }),
             getAll: () => ({ result: [] })
           })
@@ -109,7 +109,7 @@ const mockIndexedDB = {
     
     return request
   },
-  deleteDatabase: (name: string) => {
+  deleteDatabase: (_name: string) => {
     const request: any = {
       result: undefined,
       error: null,
