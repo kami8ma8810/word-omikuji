@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { RankingPage } from '../RankingPage'
-import type { RankingEntry } from '@/shared/types'
+import type { RankingEntry } from '@/infrastructure/api'
 
 // useRankingのモック
 vi.mock('@/presentation/hooks/useRanking', () => ({

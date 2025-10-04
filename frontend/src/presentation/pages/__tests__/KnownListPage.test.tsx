@@ -22,22 +22,16 @@ const mockKnowledgeList: MyKnowledge[] = [
     word: '一期一会',
     reading: 'いちごいちえ',
     definition: '一生に一度だけの機会',
-    partOfSpeech: 'idiom',
-    language: 'ja',
-    difficultyLevel: 3,
     knows: true,
-    votedAt: new Date('2025-10-01')
+    votedAt: new Date('2025-10-01').getTime()
   },
   {
     wordId: 'ja-2',
     word: '温故知新',
     reading: 'おんこちしん',
     definition: '古いものを大切にし、新しいものを学ぶ',
-    partOfSpeech: 'idiom',
-    language: 'ja',
-    difficultyLevel: 2,
     knows: true,
-    votedAt: new Date('2025-10-02')
+    votedAt: new Date('2025-10-02').getTime()
   }
 ]
 

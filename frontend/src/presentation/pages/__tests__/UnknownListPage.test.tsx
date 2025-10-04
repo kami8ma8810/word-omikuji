@@ -22,22 +22,16 @@ const mockKnowledgeList: MyKnowledge[] = [
     word: '五里霧中',
     reading: 'ごりむちゅう',
     definition: '物事の状況がわからず、迷っている様子',
-    partOfSpeech: 'idiom',
-    language: 'ja',
-    difficultyLevel: 4,
     knows: false,
-    votedAt: new Date('2025-10-03')
+    votedAt: new Date('2025-10-03').getTime()
   },
   {
     wordId: 'ja-4',
     word: '七転八倒',
     reading: 'しちてんばっとう',
     definition: '苦しみもがく様子',
-    partOfSpeech: 'idiom',
-    language: 'ja',
-    difficultyLevel: 4,
     knows: false,
-    votedAt: new Date('2025-10-04')
+    votedAt: new Date('2025-10-04').getTime()
   }
 ]
 
