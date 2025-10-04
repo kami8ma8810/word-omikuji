@@ -1,31 +1,41 @@
 # Repository Guidelines
 
-## プロジェクト構造とモジュール整理
-- 現状は計画ドキュメント中心。今後は pnpm workspace を採用し、`apps/web` に React + Vite フロント、`apps/api` に Hono バックエンドを配置。初回 scaffolding 前に issue でディレクトリ計画を共有してください。
-- ドメイン層は `packages/domain`、共通ユーティリティは `packages/shared`、テスト用スタブは `packages/testing` を想定。各モジュールは `development-guidelines.md` のクリーンアーキテクチャ区分に一致させます。
-- 語彙データや設計資料は `docs/` または `assets/vocabulary/<language>.json` に置き、巨大 JSON は生成スクリプトと checksum を添付します。
+## Project Structure & Module Organization
+- frontend/ は React + Vite のフロント。backend/ は Hono バックエンド。pnpm workspace で管理されています。
+- docs/ に計画書や語彙資料を置き、data/processed/<language>.json に語彙データを配置します。生成スクリプトと checksum を必ず添付してください。
+- 新規モジュール追加時は development-guidelines.md のクリーンアーキテクチャ区分と pnpm workspace 構成に従い、issue でディレクトリ計画を共有します。
 
-## ビルド・テスト・開発コマンド
-- `pnpm install` で依存を同期。Node.js 20 / pnpm 8 を利用し、lockfile を編集しないでください。
-- `pnpm dev --filter apps/web` でフロント、`pnpm dev --filter apps/api` で API を起動。Supabase 互換 DB が必要な場合は `docker compose up db` を使用します。
-- `pnpm lint` は ESLint + Prettier + tsc を一括実行。`pnpm test` で Vitest、`pnpm playwright test` で E2E + axe-core、`pnpm build` で本番ビルド検証を行います。
+**注記**: 将来的に apps/web、apps/api、packages/* 構成への移行を検討中です。現状は frontend/、backend/ のシンプルな構成を採用しています。
 
-## コーディングスタイルと命名規約
-- TypeScript は 2 スペース、セミコロン必須、シングルクォート基準。`pnpm lint --fix` で整形。
-- React コンポーネントは PascalCase、hooks は `useXxx`、ユースケースは `VerbNounUseCase`、リポジトリは `XxxRepository`。ファイル名は kebab-case.ts(x)、テストは `.test.ts` / `.spec.ts`。
-- Tailwind クラスは layout → spacing → typography の順で記述し、shadcn/ui コンポーネントの上書きはコメントで意図を残します。
+## Build, Test, and Development Commands
+- `pnpm install` で依存同期。Node.js 20 と pnpm 8 を前提に進めてください。
+- フロントとバックを並列起動: `pnpm dev`
+- 個別起動: `pnpm --filter frontend dev` または `pnpm --filter backend dev`
+- DB が必要なら `docker compose up db` を先行実行します。
+- 品質確認: `pnpm lint`、`pnpm test`、`pnpm typecheck`
+- リリース確認: `pnpm build`
 
-## テスト指針
-- t-wada TDD で Red → Green → Refactor を徹底。ユースケースは Vitest で 100% 分岐網羅を目指し、API は Hono test client、UI は React Testing Library を利用。
-- Playwright テスト名は `feature_scenario_expected` 形式。アクセシビリティ監視は `pnpm playwright test --project=chromium --grep @a11y` を併用します。
-- 語彙 JSON の更新時はスナップショットと差分検証スクリプトを更新し、CI で `pnpm test` と `pnpm lint` が成功することを確認します。
+**注記**: Playwright E2Eテストは実装予定です。現状は Vitest + React Testing Library でコンポーネントテストを実施しています。
 
-## コミットとプルリクエスト運用
-- Conventional Commits を厳守 (`feat:`, `fix:`, `docs:` など)。1 コミット 1 論点 + グリーンテストを原則とし、チェックリストは `development-guidelines.md` 5章を参照。
-- PR には概要・背景・スクリーンショット（UI 変更時）・テストログを添付し、API やスキーマ変更時はマイグレーション手順と後方互換性リスクを明記。
-- レビュー前に lint / test / playwright を実行し、影響が大きい場合は Draft PR で早期相談。重大リグレッションの懸念がある場合は回帰テスト範囲を追記します。
+## Coding Style & Naming Conventions
+- TypeScript は 2 スペースインデント・セミコロン必須・シングルクォート基準。`pnpm lint --fix` で整形します。
+- React コンポーネントは PascalCase、hooks は useXxx、ユースケースは VerbNounUseCase、リポジトリは XxxRepository。ファイル名は kebab-case.ts(x)、テストは .test.ts /.spec.ts。
+- Tailwind クラスは layout → spacing → typography の順序。shadcn/ui 上書きは意図をコメントで明記します。
 
-## セキュリティと設定のヒント
-- `.env.example` を最新化し、Supabase Anon Key のみを共有。機微情報はコミット禁止です。
+## Testing Guidelines
+- t-wada TDD を徹底し Red → Green → Refactor を記録。ユースケースは Vitest で分岐網羅、API は Hono test client、UI は React Testing Library。
+- テストファイルは `*.test.ts` または `*.test.tsx` の命名規則で `__tests__/` ディレクトリに配置します。
+- 現在152個のテストが実装済み（ユースケース層、リポジトリ層、カスタムフック、UIコンポーネント、ページコンポーネント）
+- 語彙 JSON 更新時はスナップショットと差分検証を更新し、CI 前に `pnpm test` と `pnpm lint` の成功を確認します。
+
+**注記**: Playwright E2Eテストとaxe-core a11yテストは今後実装予定です。
+
+## Commit & Pull Request Guidelines
+- Conventional Commits を厳守し 1 コミット 1 論点。テスト緑化後に commit してください。
+- PR には背景、変更概要、テストログ、必要に応じてスクリーンショットを添付し、API やスキーマ変更時はマイグレーション手順と後方互換性リスクを記載します。
+- 重大リグレッション懸念がある場合は Draft PR で早期相談し、追加の回帰テスト範囲を共有してください。
+
+## Security & Configuration Tips
+- `.env.example` を最新に保ち、Supabase Anon Key のみ共有。機微情報はコミット禁止です。
 - Cloudflare Workers Secret は `wrangler secret put` で登録し、CORS は `https://*.word-omikuji.app` に限定します。
-- 依存更新時は `pnpm audit --prod` と `pnpm dlx npm-check-updates` を実行し、Breaking change は個別 PR で周知してください。
+- 依存更新時は `pnpm audit --prod` と `pnpm dlx npm-check-updates` を使い、Breaking change は個別 PR で周知します。
