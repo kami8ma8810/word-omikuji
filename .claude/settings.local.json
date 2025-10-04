@@ -35,7 +35,12 @@
       "Bash(pnpm test:*)",
       "Bash(pnpm vitest:*)",
       "Bash(pnpm typecheck:*)",
-      "Bash(pnpm exec:*)"
+      "Bash(pnpm exec:*)",
+      "mcp__serena-mcp-server__check_onboarding_performed",
+      "Bash(TZ=Asia/Tokyo date '+%Y-%m-%d')",
+      "Bash(pnpm build:*)",
+      "mcp__serena-mcp-server__activate_project",
+      "Bash(pnpm --filter frontend build)"
     ],
     "deny": [],
     "ask": []
