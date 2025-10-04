@@ -8,7 +8,8 @@
 **注記**: 将来的に apps/web、apps/api、packages/* 構成への移行を検討中です。現状は frontend/、backend/ のシンプルな構成を採用しています。
 
 ## Build, Test, and Development Commands
-- `pnpm install` で依存同期。Node.js 20 と pnpm 8 を前提に進めてください。
+- `pnpm install` で依存同期。**Node.js 20.19+ または 22.12+** と pnpm 8 を前提に進めてください（Vite 7.x の要件）。
+- Node.jsのバージョン管理には `.nvmrc` を使用（`nvm use` で自動切り替え）。
 - フロントとバックを並列起動: `pnpm dev`
 - 個別起動: `pnpm --filter frontend dev` または `pnpm --filter backend dev`
 - DB が必要なら `docker compose up db` を先行実行します。

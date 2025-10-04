@@ -25,8 +25,8 @@
 - TypeScript (strict mode)
 
 ### 開発環境
-- Node.js 24.x
-- pnpm 9.x
+- **Node.js 20.19+ または 22.12+** (推奨: 20.19.0、`.nvmrc` を使用)
+- pnpm 8.x または 9.x
 - Docker (PostgreSQL)
 
 ## 🚀 セットアップ
