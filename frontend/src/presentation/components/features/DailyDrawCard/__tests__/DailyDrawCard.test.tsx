@@ -42,11 +42,41 @@ const mockStats: WordStats = {
   wordId: 'ja-1',
   knowCount: 10,
   unknownCount: 5,
-  updatedAt: new Date()
+  knowRate: 0.67,
+  unknownRate: 0.33
 }
 
 describe('DailyDrawCard', () => {
   const mockSubmitVote = vi.fn()
+
+  // AppContextType用のモック関数群
+  const mockSetCurrentWord = vi.fn()
+  const mockSetStats = vi.fn()
+  const mockSetFetchingWord = vi.fn()
+  const mockSetSubmittingVote = vi.fn()
+  const mockSetFetchError = vi.fn()
+  const mockSetVoteError = vi.fn()
+  const mockClearFetchError = vi.fn()
+  const mockClearVoteError = vi.fn()
+
+  // AppContextのモックヘルパー
+  const createMockAppContext = (overrides: Partial<ReturnType<typeof useAppContext>> = {}) => ({
+    currentWord: null,
+    stats: null,
+    isFetchingWord: false,
+    isSubmittingVote: false,
+    fetchError: null,
+    voteError: null,
+    setCurrentWord: mockSetCurrentWord,
+    setStats: mockSetStats,
+    setFetchingWord: mockSetFetchingWord,
+    setSubmittingVote: mockSetSubmittingVote,
+    setFetchError: mockSetFetchError,
+    setVoteError: mockSetVoteError,
+    clearFetchError: mockClearFetchError,
+    clearVoteError: mockClearVoteError,
+    ...overrides
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -62,14 +92,9 @@ describe('DailyDrawCard', () => {
   })
 
   it('ローディング中は「今日の一語を準備中...」と表示される', () => {
-    mockUseAppContext.mockReturnValue({
-      currentWord: null,
-      isFetchingWord: true,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      isFetchingWord: true
+    }))
 
     render(<DailyDrawCard />)
 
@@ -79,14 +104,9 @@ describe('DailyDrawCard', () => {
   it('エラー発生時はエラーメッセージが表示される', () => {
     const mockError = new Error('語を取得できませんでした')
 
-    mockUseAppContext.mockReturnValue({
-      currentWord: null,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: mockError,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      fetchError: mockError
+    }))
 
     render(<DailyDrawCard />)
 
@@ -95,14 +115,9 @@ describe('DailyDrawCard', () => {
   })
 
   it('語が正常に取得されたら語と意味が表示される', () => {
-    mockUseAppContext.mockReturnValue({
-      currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: mockEntry
+    }))
 
     render(<DailyDrawCard />)
 
@@ -116,14 +131,9 @@ describe('DailyDrawCard', () => {
   it('読み仮名がない語の場合は読み仮名が表示されない', () => {
     const entryWithoutReading = { ...mockEntry, reading: undefined }
 
-    mockUseAppContext.mockReturnValue({
-      currentWord: entryWithoutReading,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: entryWithoutReading
+    }))
 
     render(<DailyDrawCard />)
 
@@ -134,14 +144,9 @@ describe('DailyDrawCard', () => {
   it('「知ってる」ボタンをクリックすると投票が送信される', async () => {
     const user = userEvent.setup()
 
-    mockUseAppContext.mockReturnValue({
-      currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: mockEntry
+    }))
 
     mockSubmitVote.mockResolvedValue(undefined)
 
@@ -158,14 +163,9 @@ describe('DailyDrawCard', () => {
   it('「知らない」ボタンをクリックすると投票が送信される', async () => {
     const user = userEvent.setup()
 
-    mockUseAppContext.mockReturnValue({
-      currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: mockEntry
+    }))
 
     mockSubmitVote.mockResolvedValue(undefined)
 
@@ -180,14 +180,10 @@ describe('DailyDrawCard', () => {
   })
 
   it('投票中はボタンが無効化され「送信中...」と表示される', () => {
-    mockUseAppContext.mockReturnValue({
+    mockUseAppContext.mockReturnValue(createMockAppContext({
       currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: true,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+      isSubmittingVote: true
+    }))
 
     render(<DailyDrawCard />)
 
@@ -203,14 +199,9 @@ describe('DailyDrawCard', () => {
     const user = userEvent.setup()
 
     // 最初は投票前の状態
-    mockUseAppContext.mockReturnValue({
-      currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: mockEntry
+    }))
 
     mockSubmitVote.mockResolvedValue(undefined)
 
@@ -220,14 +211,10 @@ describe('DailyDrawCard', () => {
     await user.click(knowButton)
 
     // 投票後の状態に更新
-    mockUseAppContext.mockReturnValue({
+    mockUseAppContext.mockReturnValue(createMockAppContext({
       currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
       stats: mockStats
-    })
+    }))
 
     rerender(<DailyDrawCard />)
 
@@ -241,14 +228,9 @@ describe('DailyDrawCard', () => {
   it('投票エラー時はエラーメッセージが表示される', async () => {
     const user = userEvent.setup()
 
-    mockUseAppContext.mockReturnValue({
-      currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError: null,
-      stats: null
-    })
+    mockUseAppContext.mockReturnValue(createMockAppContext({
+      currentWord: mockEntry
+    }))
 
     mockSubmitVote.mockResolvedValue(undefined)
 
@@ -259,14 +241,10 @@ describe('DailyDrawCard', () => {
 
     // エラー状態に更新
     const voteError = new Error('投票に失敗しました')
-    mockUseAppContext.mockReturnValue({
+    mockUseAppContext.mockReturnValue(createMockAppContext({
       currentWord: mockEntry,
-      isFetchingWord: false,
-      isSubmittingVote: false,
-      fetchError: null,
-      voteError,
-      stats: null
-    })
+      voteError
+    }))
 
     rerender(<DailyDrawCard />)
 

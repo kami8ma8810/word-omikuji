@@ -14,19 +14,17 @@ vi.mock('../../../infrastructure/api/RankingApiClient', () => ({
 describe('useRanking', () => {
   const mockUnknownRanking: RankingEntry[] = [
     {
-      wordId: 'ja-1',
+      id: 'ja-1',
       word: '温故知新',
       reading: 'おんこちしん',
-      definition: '古いものを学んで新しい知識を得る',
       rate: 0.85,
       knowCount: 3,
       unknownCount: 17
     },
     {
-      wordId: 'ja-2',
+      id: 'ja-2',
       word: '不撓不屈',
       reading: 'ふとうふくつ',
-      definition: 'どんな困難にもくじけないこと',
       rate: 0.78,
       knowCount: 5,
       unknownCount: 18
@@ -35,19 +33,17 @@ describe('useRanking', () => {
 
   const mockKnownRanking: RankingEntry[] = [
     {
-      wordId: 'ja-3',
+      id: 'ja-3',
       word: '一期一会',
       reading: 'いちごいちえ',
-      definition: '一生に一度だけの機会',
       rate: 0.92,
       knowCount: 46,
       unknownCount: 4
     },
     {
-      wordId: 'ja-4',
+      id: 'ja-4',
       word: '花鳥風月',
       reading: 'かちょうふうげつ',
-      definition: '自然の美しい景色',
       rate: 0.88,
       knowCount: 44,
       unknownCount: 6

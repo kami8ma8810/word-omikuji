@@ -51,7 +51,8 @@ describe('useVote', () => {
     wordId: 'ja-1',
     knowCount: 10,
     unknownCount: 5,
-    updatedAt: new Date()
+    knowRate: 0.67,
+    unknownRate: 0.33
   }
 
   beforeEach(() => {

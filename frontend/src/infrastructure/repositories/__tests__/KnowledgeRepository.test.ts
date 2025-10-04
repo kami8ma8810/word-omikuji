@@ -102,7 +102,7 @@ describe('KnowledgeRepository', () => {
       ]
 
       // filter関数をモックし、その後の動作を設定
-      mockKnowledgeTable.filter.mockImplementation((filterFn) => {
+      mockKnowledgeTable.filter.mockImplementation((filterFn: (item: MyKnowledge) => boolean) => {
         // filterFnが呼ばれたことを記録
         mockKnowledgeTable.filter.lastFilterFn = filterFn
         return {
@@ -140,7 +140,7 @@ describe('KnowledgeRepository', () => {
       ]
 
       // filter関数をモックし、その後の動作を設定
-      mockKnowledgeTable.filter.mockImplementation((filterFn) => {
+      mockKnowledgeTable.filter.mockImplementation((filterFn: (item: MyKnowledge) => boolean) => {
         // filterFnが呼ばれたことを記録
         mockKnowledgeTable.filter.lastFilterFn = filterFn
         return {
@@ -161,7 +161,7 @@ describe('KnowledgeRepository', () => {
 
     it('条件に合うデータがない場合、空配列を返す', async () => {
       // filter関数をモックし、空配列を返すように設定
-      mockKnowledgeTable.filter.mockImplementation((filterFn) => {
+      mockKnowledgeTable.filter.mockImplementation((filterFn: (item: MyKnowledge) => boolean) => {
         mockKnowledgeTable.filter.lastFilterFn = filterFn
         return {
           toArray: vi.fn().mockResolvedValue([])

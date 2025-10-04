@@ -50,7 +50,7 @@ describe('useDailyWord', () => {
       execute: mockExecute
     }) as any)
 
-    const { result } = renderHook(() => useDailyWord(), { wrapper })
+    renderHook(() => useDailyWord(), { wrapper })
 
     await waitFor(() => {
       expect(mockExecute).toHaveBeenCalledTimes(1)
@@ -65,7 +65,7 @@ describe('useDailyWord', () => {
       execute: mockExecute
     }) as any)
 
-    const { result } = renderHook(() => useDailyWord(), { wrapper })
+    renderHook(() => useDailyWord(), { wrapper })
 
     await waitFor(() => {
       expect(mockExecute).toHaveBeenCalled()
