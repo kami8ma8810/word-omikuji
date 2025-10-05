@@ -11,6 +11,10 @@ dist/
 .claude/settings.local.json
 deno.lock
 
+# Playwrightテスト結果
+test-results/
+playwright-report/
+
 # データソース（大容量ファイル）
 data/source/*.xml
 data/source/*.csv
