@@ -6,6 +6,11 @@ dist/
 *.log
 .DS_Store
 
+# 開発ツール設定（ローカル環境固有）
+.serena/
+.claude/settings.local.json
+deno.lock
+
 # データソース（大容量ファイル）
 data/source/*.xml
 data/source/*.csv
