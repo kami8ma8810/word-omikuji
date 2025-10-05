@@ -124,8 +124,8 @@ describe('DailyDrawCard', () => {
     expect(screen.getByText('一期一会')).toBeInTheDocument()
     expect(screen.getByText('いちごいちえ')).toBeInTheDocument()
     expect(screen.getByText('一生に一度だけの機会')).toBeInTheDocument()
-    expect(screen.getByText('idiom')).toBeInTheDocument()
-    expect(screen.getByText('難易度: 3')).toBeInTheDocument()
+    expect(screen.getByText('慣用句')).toBeInTheDocument()
+    expect(screen.getByText('難易度: 高校生レベル')).toBeInTheDocument()
   })
 
   it('読み仮名がない語の場合は読み仮名が表示されない', () => {

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useAppContext } from '@/application/state'
 import { useDailyWord } from '@/presentation/hooks/useDailyWord'
 import { useVote } from '@/presentation/hooks/useVote'
+import { formatPartOfSpeech } from '@/shared/utils/formatPartOfSpeech'
+import { formatDifficultyLevel } from '@/shared/utils/formatDifficultyLevel'
 import './styles.css'
 
 export const DailyDrawCard = () => {
@@ -60,8 +62,8 @@ export const DailyDrawCard = () => {
         </div>
 
         <div className="metadata">
-          <span className="part-of-speech">{word.partOfSpeech}</span>
-          <span className="difficulty">難易度: {word.difficultyLevel}</span>
+          <span className="part-of-speech">{formatPartOfSpeech(word.partOfSpeech)}</span>
+          <span className="difficulty">難易度: {formatDifficultyLevel(word.difficultyLevel)}</span>
         </div>
       </div>
 
