@@ -35,16 +35,23 @@ export const RankingPage = () => {
   return (
     <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
       <div className="max-w-6xl mx-auto">
+        <header className="text-center py-8 mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            ランキング
+          </h1>
+          <p className="text-base md:text-lg text-gray-600">
+            みんなの投票から見る人気語彙TOP20
+          </p>
+        </header>
+
         <div className="mb-6">
-          <Link 
+          <Link
             to="/"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
           >
             ← ホームに戻る
           </Link>
         </div>
-
-        <h1 className="text-3xl font-bold mb-6">ランキング</h1>
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
