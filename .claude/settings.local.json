@@ -45,7 +45,8 @@
       "Bash(cat:*)",
       "Bash(pnpm --filter frontend test:e2e)",
       "Bash(echo $PATH)",
-      "Bash(pnpm:*)"
+      "Bash(pnpm:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
