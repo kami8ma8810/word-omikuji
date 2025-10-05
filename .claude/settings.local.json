@@ -40,7 +40,12 @@
       "Bash(TZ=Asia/Tokyo date '+%Y-%m-%d')",
       "Bash(pnpm build:*)",
       "mcp__serena-mcp-server__activate_project",
-      "Bash(pnpm --filter frontend build)"
+      "Bash(pnpm --filter frontend build)",
+      "Bash(pnpm playwright:*)",
+      "Bash(cat:*)",
+      "Bash(pnpm --filter frontend test:e2e)",
+      "Bash(echo $PATH)",
+      "Bash(pnpm:*)"
     ],
     "deny": [],
     "ask": []
