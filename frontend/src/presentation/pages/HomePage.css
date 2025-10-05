@@ -2,13 +2,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%);
 }
 
 .page-header {
   text-align: center;
   padding: 48px 24px 32px;
-  color: white;
+  color: #111827;
 }
 
 .app-title {
@@ -35,8 +35,7 @@
 .page-footer {
   padding: 24px;
   text-align: center;
-  color: white;
-  opacity: 0.9;
+  color: #374151;
 }
 
 .footer-text {
@@ -45,8 +44,9 @@
 }
 
 .footer-text a {
-  color: white;
+  color: #1e3a8a;
   text-decoration: underline;
+  font-weight: 600;
 }
 
 .footer-text a:hover {

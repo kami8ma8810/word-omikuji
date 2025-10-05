@@ -7,7 +7,7 @@ export const UnknownListPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center py-12">
             <p className="text-muted-foreground">読み込み中...</p>
@@ -19,7 +19,7 @@ export const UnknownListPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
         <div className="max-w-4xl mx-auto">
           <Card>
             <CardContent className="pt-6">
@@ -33,7 +33,7 @@ export const UnknownListPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
           <Link 
