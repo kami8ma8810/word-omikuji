@@ -57,14 +57,6 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
   ],
   webServer: {
     command: 'pnpm dev',
@@ -73,6 +65,8 @@ export default defineConfig({
   },
 })
 ```
+
+> **Note**: 現在は Chromium のみで実行しています。Firefox/WebKit は Phase 4 完了後に追加予定です。まず確実に動作する環境を優先し、段階的にブラウザ対応を拡大していきます。
 
 ### 重要なユーザーフローのテスト
 
