@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -19,6 +20,10 @@ export default {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+        },
+        tertiary: {
+          DEFAULT: 'hsl(var(--tertiary))',
+          foreground: 'hsl(var(--tertiary-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -42,9 +47,46 @@ export default {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
+        lg: 'var(--radius-lg)',
+        md: 'var(--radius)',
         sm: 'calc(var(--radius) - 4px)',
+        sharp: 'var(--radius-sharp)',
+        full: 'var(--radius-full)',
+      },
+      boxShadow: {
+        'elevation-1': 'var(--elevation-1)',
+        'elevation-2': 'var(--elevation-2)',
+        'elevation-3': 'var(--elevation-3)',
+        'elevation-4': 'var(--elevation-4)',
+      },
+      animation: {
+        'spring-bounce': 'spring-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'spring-smooth': 'spring-smooth 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'morph-in': 'morph-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'morph-out': 'morph-out 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+      keyframes: {
+        'spring-bounce': {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '60%': { transform: 'scale(1.02)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'spring-smooth': {
+          '0%': { transform: 'translateY(-4px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'morph-in': {
+          '0%': { borderRadius: 'var(--radius-sharp)', transform: 'scale(0.98)' },
+          '100%': { borderRadius: 'var(--radius-lg)', transform: 'scale(1)' },
+        },
+        'morph-out': {
+          '0%': { borderRadius: 'var(--radius-lg)', transform: 'scale(1)' },
+          '100%': { borderRadius: 'var(--radius-sharp)', transform: 'scale(0.98)' },
+        },
+      },
+      transitionTimingFunction: {
+        'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'spring-smooth': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
     },
   },

@@ -4,26 +4,87 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* HCT-based Color Palette - Nintendo/Game Dashboard Inspired */
+    /* Primary: Vibrant Red (Nintendo Switch Red) */
+    --primary: 0 85% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Bright Blue (Playful Sky Blue) */
+    --secondary: 210 95% 62%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Tertiary: Sunny Yellow (Cheerful Accent) */
+    --tertiary: 48 95% 65%;
+    --tertiary-foreground: 240 10% 10%;
+
+    /* Accent: Electric Purple (Game Energy) */
+    --accent: 270 80% 68%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Surface Colors - Light Theme */
+    --background: 240 20% 98%;
+    --foreground: 240 10% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 240 10% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --popover-foreground: 240 10% 10%;
+
+    /* Muted Colors */
+    --muted: 240 5% 94%;
+    --muted-foreground: 240 4% 46%;
+
+    /* Destructive */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border & Input */
+    --border: 240 10% 88%;
+    --input: 240 10% 88%;
+    --ring: 0 85% 58%;
+
+    /* Shape Tokens */
     --radius: 0.5rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
+    --radius-sharp: 0.25rem;
+
+    /* Elevation/Shadow Tokens */
+    --elevation-1: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --elevation-2: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --elevation-3: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --elevation-4: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* Dark Theme - Game Console Inspired */
+    --background: 240 10% 8%;
+    --foreground: 0 0% 95%;
+    --card: 240 8% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 8% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 85% 65%;
+    --primary-foreground: 0 0% 10%;
+
+    --secondary: 210 90% 68%;
+    --secondary-foreground: 0 0% 10%;
+
+    --tertiary: 48 90% 70%;
+    --tertiary-foreground: 240 10% 10%;
+
+    --accent: 270 75% 72%;
+    --accent-foreground: 0 0% 10%;
+
+    --muted: 240 5% 20%;
+    --muted-foreground: 240 5% 64%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 20%;
+    --input: 240 5% 20%;
+    --ring: 0 85% 65%;
   }
 }
 
@@ -32,6 +93,7 @@
     border-color: hsl(var(--border));
   }
   body {
+    /* ライトテーマ: 明るく柔らかいグラデーション */
     background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%);
     min-height: 100vh;
     color: hsl(var(--foreground));
@@ -40,5 +102,10 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ダークテーマ: ゲームコンソール風の深みのあるグラデーション */
+  .dark body {
+    background: linear-gradient(135deg, #0f0a1e 0%, #1a1232 30%, #0d1b2a 60%, #1b263b 100%);
   }
 }
