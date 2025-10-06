@@ -46,7 +46,10 @@
       "Bash(pnpm --filter frontend test:e2e)",
       "Bash(echo $PATH)",
       "Bash(pnpm:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "mcp__obsidian-mcp-tools__list_vault_files",
+      "mcp__serena-mcp-server__onboarding",
+      "mcp__serena-mcp-server__write_memory"
     ],
     "deny": [],
     "ask": []
