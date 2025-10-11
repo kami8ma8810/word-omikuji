@@ -183,9 +183,9 @@ describe('RankingPage', () => {
 
     renderWithRouter(<RankingPage />)
 
-    // 1位の語の統計
-    const firstEntry = screen.getAllByText(/知らない:/)[0]
-    expect(firstEntry).toBeInTheDocument()
+    // 1位の語の統計（投票数とパーセンテージ）
+    const unknownCounts = screen.getAllByText('90人')
+    expect(unknownCounts.length).toBeGreaterThan(0)
     const percentages = screen.getAllByText('90.0%')
     expect(percentages.length).toBeGreaterThan(0)
   })

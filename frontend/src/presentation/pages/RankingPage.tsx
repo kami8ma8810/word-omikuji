@@ -1,6 +1,8 @@
 import { useRanking } from '@/presentation/hooks/useRanking'
 import { Card, CardHeader, CardTitle, CardContent } from '@/presentation/components/ui/card'
 import { PageHeader } from '@/presentation/components/shared/PageHeader'
+import { ErrorMessage } from '@/presentation/components/shared/ErrorMessage'
+import { LoadingSpinner } from '@/presentation/components/shared/LoadingSpinner'
 
 export const RankingPage = () => {
   const { unknownRanking, knownRanking, loading, error } = useRanking(20)
@@ -9,9 +11,7 @@ export const RankingPage = () => {
     return (
       <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center py-12">
-            <p className="text-muted-foreground">読み込み中...</p>
-          </div>
+          <LoadingSpinner />
         </div>
       </div>
     )
@@ -21,12 +21,7 @@ export const RankingPage = () => {
     return (
       <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
         <div className="max-w-6xl mx-auto">
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-destructive">エラーが発生しました</p>
-              <p className="text-sm text-muted-foreground mt-2">{error.message}</p>
-            </CardContent>
-          </Card>
+          <ErrorMessage message={error.message} />
         </div>
       </div>
     )
@@ -52,27 +47,28 @@ export const RankingPage = () => {
                   データがありません
                 </p>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {unknownRanking.map((entry, index) => (
                     <div
                       key={entry.id}
-                      className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 transition-colors"
+                      className="flex items-center gap-4 p-4 rounded-md border hover:border-destructive/50 transition-colors"
                     >
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-destructive/10 text-destructive flex items-center justify-center font-bold text-sm">
-                        {index + 1}
+                      <div className="flex-shrink-0 w-10 text-center">
+                        <span className="text-lg font-bold text-destructive">{index + 1}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold truncate">{entry.word}</h3>
+                        <h3 className="font-bold text-base truncate">{entry.word}</h3>
                         {entry.reading && (
-                          <p className="text-xs text-muted-foreground">{entry.reading}</p>
+                          <p className="text-sm text-muted-foreground mt-0.5">{entry.reading}</p>
                         )}
-                        <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                          <span>知らない: {entry.unknownCount}</span>
-                          <span>知ってる: {entry.knowCount}</span>
-                          <span className="font-medium text-destructive">
-                            {(entry.rate * 100).toFixed(1)}%
-                          </span>
-                        </div>
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <p className="text-lg font-bold text-destructive">
+                          {(entry.rate * 100).toFixed(1)}%
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {entry.unknownCount}人
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -91,27 +87,28 @@ export const RankingPage = () => {
                   データがありません
                 </p>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {knownRanking.map((entry, index) => (
                     <div
                       key={entry.id}
-                      className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 transition-colors"
+                      className="flex items-center gap-4 p-4 rounded-md border hover:border-primary/50 transition-colors"
                     >
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
-                        {index + 1}
+                      <div className="flex-shrink-0 w-10 text-center">
+                        <span className="text-lg font-bold text-primary">{index + 1}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold truncate">{entry.word}</h3>
+                        <h3 className="font-bold text-base truncate">{entry.word}</h3>
                         {entry.reading && (
-                          <p className="text-xs text-muted-foreground">{entry.reading}</p>
+                          <p className="text-sm text-muted-foreground mt-0.5">{entry.reading}</p>
                         )}
-                        <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                          <span>知ってる: {entry.knowCount}</span>
-                          <span>知らない: {entry.unknownCount}</span>
-                          <span className="font-medium text-primary">
-                            {(entry.rate * 100).toFixed(1)}%
-                          </span>
-                        </div>
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <p className="text-lg font-bold text-primary">
+                          {(entry.rate * 100).toFixed(1)}%
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {entry.knowCount}人
+                        </p>
                       </div>
                     </div>
                   ))}
