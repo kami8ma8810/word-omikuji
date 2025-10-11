@@ -55,7 +55,7 @@ export const KnownListPage = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>知ってる語リスト</CardTitle>
+            <CardTitle>語彙一覧</CardTitle>
             <p className="text-sm text-muted-foreground mt-2">
               {knowledgeList.length}件の語があります
             </p>

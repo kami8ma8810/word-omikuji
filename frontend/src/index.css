@@ -108,4 +108,16 @@
   .dark body {
     background: linear-gradient(135deg, #0f0a1e 0%, #1a1232 30%, #0d1b2a 60%, #1b263b 100%);
   }
+
+  /* アクセシビリティ: prefers-reduced-motion 対応 */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
