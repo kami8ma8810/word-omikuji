@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import { useKnowledgeList } from '@/presentation/hooks/useKnowledgeList'
 import { Card, CardHeader, CardTitle, CardContent } from '@/presentation/components/ui/card'
+import { PageHeader } from '@/presentation/components/shared/PageHeader'
 
 export const UnknownListPage = () => {
   const { knowledgeList, loading, error } = useKnowledgeList(false)
@@ -35,23 +35,11 @@ export const UnknownListPage = () => {
   return (
     <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%)' }}>
       <div className="max-w-4xl mx-auto">
-        <header className="text-center py-8 mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            知らない語リスト
-          </h1>
-          <p className="text-base md:text-lg text-gray-600">
-            あなたが「知らない」と答えた語彙一覧
-          </p>
-        </header>
-
-        <div className="mb-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-          >
-            ← ホームに戻る
-          </Link>
-        </div>
+        <PageHeader
+          title="知らない語リスト"
+          subtitle="あなたが「知らない」と答えた語彙一覧"
+          showBackButton
+        />
 
         <Card>
           <CardHeader>

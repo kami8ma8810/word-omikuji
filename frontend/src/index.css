@@ -14,8 +14,8 @@
     --secondary-foreground: 0 0% 100%;
 
     /* Tertiary: Sunny Yellow (Cheerful Accent) */
-    --tertiary: 48 95% 65%;
-    --tertiary-foreground: 240 10% 10%;
+    --tertiary: 48 95% 60%;
+    --tertiary-foreground: 240 10% 5%;
 
     /* Accent: Electric Purple (Game Energy) */
     --accent: 270 80% 68%;
